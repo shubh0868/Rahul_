@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Rahul</title>
+    <style>
+        body {
+            background-color: #ff8c00;
+            overflow: hidden;
+            text-align: center;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: red;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: floatUp 6s linear infinite;
+        }
+        .image-container {
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: moveUp 3s ease-in-out forwards;
+        }
+        .image-container img {
+            width: 300px;
+            height: auto;
+        }
+        .wishes {
+            margin-top: 20px;
+            font-size: 20px;
+            color: white;
+        }
+        .wishes b {
+            font-weight: bold;
+        }
+        @keyframes moveUp {
+            from {
+                bottom: -200px;
+            }
+            to {
+                bottom: 100px;
+            }
+        }
+        @keyframes floatUp {
+            from {
+                bottom: -100px;
+            }
+            to {
+                bottom: 100vh;
+            }
+        }
+        .message {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            z-index: 10;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.9;
+        }
+        @keyframes burst {
+            0% { transform: translate(0, 0); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">HAPPY BIRTHDAY RAHUL JI</div>
+    <div class="image-container">
+        <img src="1000156184.png" alt="Rahul's Birthday">
+        <div class="wishes">Wishes from <b>SHUBHAM</b></div>
+    </div>
+    <script>
+        function createBalloon() {
+            const balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+            document.body.appendChild(balloon);
+
+            const colors = ["red", "blue", "yellow", "green", "purple", "orange"];
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            balloon.style.left = Math.random() * window.innerWidth + "px";
+            balloon.style.bottom = "-100px";
+        }
+
+        function createPopper() {
+            const numConfetti = 20;
+            for (let i = 0; i < numConfetti; i++) {
+                const confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                document.body.appendChild(confetti);
+
+                const colors = ["#ff0", "#0ff", "#f0f", "#0f0", "#f00", "#00f"];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                const x = (Math.random() - 0.5) * 300 + 'px';
+                const y = (Math.random() - 0.5) * 300 + 'px';
+
+                confetti.style.setProperty('--x', x);
+                confetti.style.setProperty('--y', y);
+
+                confetti.style.left = (window.innerWidth / 2) + 'px';
+                confetti.style.top = (window.innerHeight / 2) + 'px';
+                confetti.style.animation = 'burst 1s ease-out forwards';
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 1000);
+            }
+        }
+
+        setInterval(createBalloon, 500);
+        setInterval(createPopper, 2000);
+    </script>
+</body>
+</html>
